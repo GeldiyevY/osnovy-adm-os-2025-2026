@@ -1,0 +1,147 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Гелдиев Ыхлас
+  degrees: DSc
+  orcid: 0000-0002-0877-7063
+  email: 1032249184@pfur.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: "Лабораторная работа"
+subtitle: "№1"
+license: "CC BY"
+## Generic options
+lang: ru-RU
+number-sections: true
+toc: true
+toc-title: "Содержание"
+toc-depth: 2
+## Crossref customization
+crossref:
+  lof-title: "Список иллюстраций"
+  lot-title: "Список таблиц"
+  lol-title: "Листинги"
+## Bibliography
+bibliography:
+  - bib/cite.bib
+csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
+## Formats
+format:
+### Pdf output format
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    lof: true # List of figures
+    lot: true # List of tables
+#### Document
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 12pt
+    linestretch: 1.5
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+#### Biblatex
+    cite-method: biblatex
+    biblio-style: gost-numeric
+    biblatexoptions:
+      - backend=biber
+      - langhook=extras
+      - autolang=other*
+#### Misc options
+    csquotes: true
+    indent: true
+    header-includes: |
+      \usepackage{indentfirst}
+      \usepackage{float}
+      \floatplacement{figure}{H}
+      \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+### Docx output format
+  docx:
+    toc: true
+    number-sections: true
+    toc-depth: 2
+---
+
+# Цель работы
+
+Приобретение практических навыков установки операционной системы на виртуальную машину.
+Настройка минимально необходимых, для дальнейшей работы, сервисов.
+
+# Выполнение лабораторной работы
+
+1. Выполнить команды ([рис. @fig-001])
+```
+cd /var/tmp
+mkdir /var/tmp/igeldiev
+```
+
+![Выполнение команд](image/1.png){#fig-001}
+
+2. Настройка VirtualBox ([рис. @fig-002])
+
+![Настройка VirtualBox](image/2.png){#fig-002}
+
+3. Создание виртуальной машины ([рис. @fig-003]) ([рис. @fig-004]) ([рис. @fig-005])
+
+![Имя и выбор ISO образа](image/3.png){#fig-003}
+
+![Оборудование](image/4.png){#fig-004}
+
+![Жесткий диск](image/5.png){#fig-005}
+
+4. Установка Rocky OS.
+
+![Выбираем "Install Rocky Linux"](image/6.png){#fig-006}
+
+![Выбираем "English"](image/7.png){#fig-007}
+
+![Выбираем "Server with GUI"](image/8.png){#fig-008}
+
+5. Ставим пароль для root пользователя ([рис. @fig-009]). Добавляем нового пользователя как администратора
+
+![Пароль на root](image/9.png){#fig-009}
+
+6. Начинаем, устанавливаем и перезапускаем систему.
+
+![Установка](image/10.png){#fig-010}
+
+7. Входим в систему и подключаем образ диска гостевой ОС...
+
+![Вход](image/11.png){#fig-011}
+
+![Подключаем](image/12.png){#fig-012}
+
+![Смотрим на консоль](image/13.png){#fig-013}
+
+# Домашняя работа
+
+![Версия Linux](image/14.png)
+
+![Частота процессора](image/15.png)
+
+![Модель процессора](image/16.png)
+
+![Объем оперативной памяти](image/17.png)
+
+![Тип обнаруженного гипервизора](image/18.png)
+
+![Тип файловой системы и Последовательность мотирования файловых систем](image/19.png)
+
+# Выводы
+
+Я приобрел практические навыки установки операционной системы на виртуальную машину и настроил минимально необходимые, для дальнейшей работы, сервисы.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
+:::
