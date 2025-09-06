@@ -1,0 +1,160 @@
+---
+# Preamble
+
+## Author
+author:
+  name: Гелдиев Ыхлас
+  degrees: DSc
+  orcid: 0000-0002-0877-7063
+  email: 1032249184@pfur.ru
+  affiliation:
+    - name: Российский университет дружбы народов
+      country: Российская Федерация
+      postal-code: 117198
+      city: Москва
+      address: ул. Миклухо-Маклая, д. 6
+## Title
+title: Лабораторная работа
+subtitle: №1
+license: CC BY
+date: 2025-09-06
+## Generic options
+lang: ru-RU
+crossref:
+  lof-title: Список иллюстраций
+  lot-title: Список таблиц
+  lol-title: Листинги
+## Formats
+format:
+### Pdf output format
+  beamer:
+    include-in-header: 
+      text: |
+        \usepackage{fontspec}
+        \setmainfont{Noto Serif}
+        \setsansfont{Noto Sans}
+    toc: true
+    toc-title: Содержание
+    number-sections: true
+    colorlinks: false
+    toc-depth: 2
+    slide_level: 2
+    aspectratio: 169
+    section-titles: true
+    theme: metropolis
+    themeoptions: progressbar=frametitle,sectionpage=progressbar,numbering=fraction
+#### Language
+    babel-lang: russian
+    babel-otherlangs: english
+### Html output
+  revealjs:
+    transition: slide
+    margin: 0.2
+    smaller: false
+    output-ext: html
+    theme: beige
+    logo: _resources/image/logo_rudn.png
+---
+
+# Информация
+
+## Докладчик
+
+  * Гелдиев Ыхлас
+  * студент направления "Прикладная Информатика"
+  * Российский университет дружбы народов им. П. Лумумбы
+  * [1032249184@pfur.ru](mailto:1032249184@pruf.ru)
+  * <https://geldiyevy.github.io/ru/>
+
+# Цель работы
+
+- Приобретение практических навыков установки операционной системы на виртуальную машину.
+- Настройка минимально необходимых, для дальнейшей работы, сервисов.
+
+# Выполнение лабораторной работы
+
+## Выполнить команды ([рис. @fig-001])
+
+```
+cd /var/tmp
+mkdir /var/tmp/igeldiev
+```
+
+![Выполнение команд](image/1.png){#fig-001}
+
+# Настройка VirtualBox ([рис. @fig-002])
+
+![Настройка VirtualBox](image/2.png){#fig-002}
+
+# Создание виртуальной машины ([рис. @fig-003]) ([рис. @fig-004]) ([рис. @fig-005])
+
+![Имя и выбор ISO образа](image/3.png){#fig-003}
+
+#
+
+![Оборудование](image/4.png){#fig-004}
+
+#
+
+![Жесткий диск](image/5.png){#fig-005}
+
+# Установка Rocky OS.
+
+![Выбираем "Install Rocky Linux"](image/6.png){#fig-006}
+
+#
+
+![Выбираем "English"](image/7.png){#fig-007}
+
+#
+
+![Выбираем "Server with GUI"](image/8.png){#fig-008}
+
+# Ставим пароль для root пользователя ([рис. @fig-009]). Добавляем нового пользователя как администратора
+
+![Пароль на root](image/9.png){#fig-009}
+
+# Начинаем устанавливать, устанавливаем и перезапускаем систему.
+
+![Установка](image/10.png){#fig-010}
+
+# Входим в систему и подключаем образ диска гостевой ОС...
+
+![Вход](image/11.png){#fig-011}
+
+#
+
+![Подключаем](image/12.png){#fig-012}
+
+#
+
+![Смотрим на консоль](image/13.png){#fig-013}
+
+# Домашняя работа
+
+![Версия Linux](image/14.png)
+
+#
+
+![Частота процессора](image/15.png)
+
+#
+
+![Модель процессора](image/16.png)
+
+#
+
+![Объем оперативной памяти](image/17.png)
+
+#
+
+![Тип обнаруженного гипервизора](image/18.png)
+
+#
+
+![Тип файловой системы и Последовательность мотирования файловых систем](image/19.png)
+
+# Вывод
+
+Я приобрел практические навыки установки операционной системы на виртуальную машину и настроил минимально необходимые, для дальнейшей работы, сервисы.
+
