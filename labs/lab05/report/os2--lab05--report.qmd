@@ -3,10 +3,10 @@
 
 ## Author
 author:
-  name: Дмитрий Сергеевич Кулябов
+  name: Гелдиев Ыхлас
   degrees: DSc
   orcid: 0000-0002-0877-7063
-  email: kulyabov-ds@rudn.ru
+  email: 1032249184@pfur.ru
   affiliation:
     - name: Российский университет дружбы народов
       country: Российская Федерация
@@ -14,8 +14,8 @@ author:
       city: Москва
       address: ул. Миклухо-Маклая, д. 6
 ## Title
-title: "Шаблон отчёта по лабораторной работе"
-subtitle: "Простейший вариант"
+title: "Лабораторная работа №5"
+subtitle: "Управление системными службами"
 license: "CC BY"
 ## Generic options
 lang: ru-RU
@@ -34,7 +34,7 @@ bibliography:
 csl: _resources/csl/gost-r-7-0-5-2008-numeric.csl
 ## Formats
 format:
-### Pdf output format
+  ### Pdf output format
   pdf:
     toc: true
     number-sections: true
@@ -42,22 +42,22 @@ format:
     toc-depth: 2
     lof: true # List of figures
     lot: true # List of tables
-#### Document
+    #### Document
     documentclass: scrreprt
     papersize: a4
     fontsize: 12pt
     linestretch: 1.5
-#### Language
+    #### Language
     babel-lang: russian
     babel-otherlangs: english
-#### Biblatex
+    #### Biblatex
     cite-method: biblatex
     biblio-style: gost-numeric
     biblatexoptions:
       - backend=biber
       - langhook=extras
       - autolang=other*
-#### Misc options
+    #### Misc options
     csquotes: true
     indent: true
     header-includes: |
@@ -65,7 +65,7 @@ format:
       \usepackage{float}
       \floatplacement{figure}{H}
       \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
-### Docx output format
+  ### Docx output format
   docx:
     toc: true
     number-sections: true
@@ -74,44 +74,188 @@ format:
 
 # Цель работы
 
-Здесь приводится формулировка цели лабораторной работы. Формулировки цели для каждой лабораторной работы приведены в методических указаниях.
-
-Цель данного шаблона --- максимально упростить подготовку отчётов по лабораторным работам.  Модифицируя данный шаблон, студенты смогут без труда подготовить отчёт по лабораторным работам, а также познакомиться с основными возможностями разметки Markdown.
+Получить навыки управления системными службами операционной системы посредством systemd.
 
 # Задание
 
-Здесь приводится описание задания в соответствии с рекомендациями методического пособия и выданным вариантом.
-
-# Теоретическое введение
-
-Здесь описываются теоретические аспекты, связанные с выполнением работы.
-
-Например, в [табл. @tbl-std-dir] приведено краткое описание стандартных каталогов Unix.
-
-| Имя каталога | Описание каталога                                                                                                          |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|
-| `/`          | Корневая директория, содержащая всю файловую                                                                               |
-| `/bin `      | Основные системные утилиты, необходимые как в однопользовательском режиме, так и при обычной работе всем пользователям     |
-| `/etc`       | Общесистемные конфигурационные файлы и файлы конфигурации установленных программ                                           |
-| `/home`      | Содержит домашние директории пользователей, которые, в свою очередь, содержат персональные настройки и данные пользователя |
-| `/media`     | Точки монтирования для сменных носителей                                                                                   |
-| `/root`      | Домашняя директория пользователя  `root`                                                                                   |
-| `/tmp`       | Временные файлы                                                                                                            |
-| `/usr`       | Вторичная иерархия для данных пользователя                                                                                 |
-
-: Описание некоторых каталогов файловой системы GNU Linux {#tbl-std-dir}
-
-Более подробно про Unix см. в [@tanenbaum_book_modern-os_ru; @robbins_book_bash_en; @zarrelli_book_mastering-bash_en; @newham_book_learning-bash_en].
+1. Выполните основные операции по запуску (останову), определению статуса, добавлению (удалению) в автозапуск и пр. службы Very Secure FTP (раздел 5.4.1).
+2. Продемонстрируйте навыки по разрешению конфликтов юнитов для служб firewalld и iptables (раздел 5.4.2).
+3. Продемонстрируйте навыки работы с изолированными целями (разделы 5.4.3, 5.4.4).
 
 # Выполнение лабораторной работы
 
-Описываются проведённые действия, в качестве иллюстрации даётся ссылка на иллюстрацию ([рис. @fig-001]).
+## Управление сервисами
 
-![V Сольвеевский конгресс (1927) «Электроны и фотоны»](image/solvay.jpg){#fig-001 width=70%}
+1. Получите полномочия администратора
+   `su -`
+
+   ![`su -`](image/su.png)
+
+2. Проверьте статус службы Very Secure FTP: ([рис. @fig-001])
+   `systemctl status vsftpd`
+
+   Вывод команды должен показать, что сервис в настоящее время отключён, так как
+   служба Very Secure FTP не установлена.
+
+3. Установите службу Very Secure FTP: ([рис. @fig-001])
+   `dnf -y install vsftpd`
+
+   ![VSFTPD 1](image/vsftpd_1.png){#fig-001}
+
+4. Запустите службу Very Secure FTP: ([рис. @fig-002])
+   `systemctl start vsftpd`
+5. Проверьте статус службы Very Secure FTP: ([рис. @fig-002])
+   `systemctl status vsftpd`
+
+   Вывод команды должен показать, что служба в настоящее время работает, но не будет
+   активирована при перезапуске операционной системы.
+
+   ![VSFTPD 2](image/vsftpd_2.png){#fig-002}
+
+6. Добавьте службу Very Secure FTP в автозапуск при загрузке операционной системы, используя команду `systemctl enable`. Затем проверьте статус службы. Удалите службу из автозапуска, используя команду `systemctl disable`, и снова проверьте её статус.
+
+   ![VSFTPD 3](image/vsftpd_3.png)
+
+7. Выведите на экран символические ссылки, ответственные за запуск различных сервисов: ([рис. @fig-003])
+   `ls /etc/systemd/system/multi-user.target.wants`
+   Должно отобразиться, что ссылка на `vsftpd.service` не существует.
+8. Снова добавьте службу Very Secure FTP в автозапуск: ([рис. @fig-003])
+   `systemctl enable vsftpd`
+   и выведите на экран символические ссылки, ответственные за запуск различных
+   сервисов.
+
+   Вывод команды покажет, что создана символическая ссылка для
+   файла `/usr/lib/systemd/system/vsftpd.service` в каталоге
+   `/etc/systemd/system/multi-user.target.wants`.
+
+9. Снова проверьте статус службы Very Secure FTP: ([рис. @fig-003])
+   `systemctl status vsftpd`
+   Теперь вы увидите, что для файла юнита состояние изменено с `disabled` на `enabled`.
+
+![VSFTPD 4](image/vsftpd_4.png){#fig-003}
+
+10. Выведите на экран список зависимостей юнита:
+    `systemctl list-dependencies vsftpd`
+
+    ![VSFTPD dependencies](image/vsftpd_dep.png)
+
+11. Выведите на экран список юнитов, которые зависят от данного юнита:
+    `systemctl list-dependencies vsftpd --reverse`
+
+    ![VSFTPD reverse dependensies](image/vsftpd_rev_dep.png)
+
+## Конфликты юнитов
+
+1. Получите полномочия администратора. Установите iptables:
+   `dnf -y install iptables\*`
+
+   ![`dnf -y install iptables*`](image/iptables_install.png)
+
+2. Проверьте статус firewalld и iptables: ([рис. @fig-004])
+   `systemctl status firewalld`
+   `systemctl status iptables`
+3. Попробуйте запустить firewalld и iptables: ([рис. @fig-004])
+   `systemctl start firewalld`
+   `systemctl start iptables`
+   Вы увидите, что при запуске одной службы вторая дезактивируется или не запускается.
+
+   ![Conflicts 1](image/iptables_1.png){#fig-004}
+
+4. Введите: ([рис. @fig-005])
+   `cat /usr/lib/systemd/system/firewalld.service`
+   и опишите настройки конфликтов для этого юнита при наличии.
+5. Введите: ([рис. @fig-005])
+   `cat /usr/lib/systemd/system/iptables.service`
+   и опишите настройки конфликтов для этого юнита.
+
+   ![Conflicts 2](image/iptables_2.png){#fig-005}
+
+6. Выгрузите службу iptables (на всякий случай, чтобы убедиться, что данная служба
+   не загружена в систему): ([рис. @fig-006])
+   `systemctl stop iptables`
+   и загрузите службу firewalld
+   `systemctl start firewalld`
+7. Заблокируйте запуск iptables, введя: ([рис. @fig-006])
+   `systemctl mask iptables`
+   Будет создана символическая ссылка на /dev/null для
+   /etc/systemd/system/iptables.service (проверьте это). Поскольку юнитфайлы в /etc/systemd имеют приоритет над файлами в /usr/lib/systemd, то это
+   сделает невозможным случайный запуск сервиса iptables.
+8. Попробуйте запустить iptables: ([рис. @fig-006])
+   `systemctl start iptables`
+   Должно появиться сообщение об ошибке, указывающее, что служба замаскирована
+   и по этой причине не может быть запущена.
+9. Попробуйте добавить iptables в автозапуск: ([рис. @fig-006])
+   `systemctl enable iptables`
+   Сервис будет неактивен, а статус загрузки отобразится как замаскированный.
+
+   ![Conflicts 3](image/iptables_3.png){#fig-006}
+
+## Изолируемые цели
+
+1. Получите полномочия администратора. Перейдите в каталог systemd и найдите список всех целей, которые можно изолировать: ([рис. @fig-007])
+   `cd /usr/lib/systemd/system`
+   `grep Isolate \*.target`
+2. Переключите операционную систему в режим восстановления: ([рис. @fig-007])
+   `systemctl isolate rescue.target`
+   При этом необходимо ввести пароль root на консоли сервера для входа в систему.
+
+   ![Isolate 1](image/isolate_1.png){#fig-007}
+
+3. Перезапустите операционную систему следующим образом:
+   `systemctl isolate reboot.target`
+
+   ![`systemctl isolate reboot.target`](image/isolate_2.png)
+
+## Цель по умолчанию
+
+1. Получите полномочия администратора. Выведите на экран цель, установленную по
+   умолчанию: ([рис. @fig-008])
+   `systemctl get-default`
+2. Для установки цели по умолчанию используется команда:
+   `systemctl set-default`
+   Например, для запуска по умолчанию текстового режима введите: ([рис. @fig-008])
+   `systemctl set-default multi-user.target`
+   Перегрузите систему командой reboot. Убедитесь, что система загрузилась в текстовом режиме. Получите полномочия администратора. Для запуска по умолчанию графического режима введите:
+   `systemctl set-default graphical.target`
+   Вновь перегрузите систему командой reboot. Убедитесь, что система загрузилась в графическом режиме.
+
+   ![Default 1](image/default_1.png){#fig-008}
+
+   ![Default 2](image/default_2.png)
+
+## Контрольные вопросы
+
+1. Что такое юнит (unit)? Приведите примеры.
+
+- Юнит — это конфигурационный объект systemd (service, socket, target, mount и т.д.), например sshd.service, multi-user.target, dev-sda1.device.
+
+2. Какая команда позволяет вам убедиться, что цель больше не входит в список автоматического запуска при загрузке системы?
+
+- systemctl disable <unit>
+
+4. Какую команду вы должны использовать для отображения всех сервисных юнитов, которые в настоящее время загружены?
+
+- systemctl list-units --type=service --all
+
+6. Как создать потребность (wants) в сервисе?
+
+- В юните другого сервиса добавить в секцию [Install] строку Wants=<your.service> или в единице создать symlink в .wants/; можно systemctl add-wants <target> <service>.
+
+9. Как переключить текущее состояние на цель восстановления (rescue target)?
+
+- systemctl isolate rescue.target
+
+10. Поясните причину получения сообщения о том, что цель не может быть изолирована.
+
+- Потому что другие активные юниты зависят от неё, или цель не допускает изоляции из-за зависимостей/состояния.
+
+12. Вы хотите отключить службу systemd, но, прежде чем сделать это, вы хотите узнать, какие другие юниты зависят от этой службы. Какую команду вы бы использовали?
+
+- systemctl list-dependencies --reverse <service>
 
 # Выводы
 
-Здесь кратко описываются итоги проделанной работы.
+Я получил навыки управления системными службами операционной системы посредством systemd.
 
 # Список литературы{.unnumbered}
 
